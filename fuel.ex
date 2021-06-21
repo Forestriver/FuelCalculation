@@ -15,13 +15,13 @@ defmodule Start do
 #       |> Float.floor
   end
 
-    # amount of fuel for landing
+# amount of fuel for landing
   def land do
     Start.ship_mass * Start.gravity * 0.033 - 42
               |> Kernel.trunc
   end
 
-    # amount of fuel for launch
+# amount of fuel for launch
   def launch do
     Start.ship_mass * Start.gravity * 0.042 - 33
               |> Kernel.trunc
@@ -33,18 +33,18 @@ end
 
 
 defmodule Fuel do
-  def add_fuel(ship_mass) when ship_mass <= 0 do
+  def add_fuel(ship_mass, add_mass) when add_mass <= 0 do
     ship_mass
   end
 
-  def add_fuel(ship_mass) do
-    add_mass = ship_mass * Start.gravity * 0.042 - 33
+  def add_fuel(ship_mass, gravity) do
+    add_mass = ship_mass * gravity * 0.042 - 33
     total = add_mass + ship_mass
-    add_fuel(total)
+  #  add_fuel(ship_mass, total)
+    IO.puts(total)
   end
 end
-IO.puts(Fuel.add_fuel(Start.ship_mass))
-
+IO.puts(Fuel.add_fuel(Start.ship_mass, Start.gravity))
 
 
 
@@ -73,19 +73,3 @@ IO.puts(Fuel.add_fuel(Start.ship_mass))
 #    IO.puts(launch)
 #  end
 #end
-
-#defmodule Tea do
-#  def num_input do
-#    IO.gets("How many cups? ")
-#      |> String.trim
-#      |> String.to_integer
-#  end
-#end
-#defmodule TeaPrint do
-#  def tea_print do
-#    res = Tea.num_input + 12
-#    IO.puts(res)
-#  end
-#end
-
-#TeaPrint.tea_print
