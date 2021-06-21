@@ -6,7 +6,6 @@ defmodule Start do
        |> String.trim
        |> String.to_integer
   end
-
   #user input for planet gravity
   def gravity do
     IO.gets("Enter planet gravity: ")
@@ -14,7 +13,6 @@ defmodule Start do
        |> String.to_float
 #       |> Float.floor
   end
-
 # amount of fuel for landing
   def land do
     Start.ship_mass * Start.gravity * 0.033 - 42
@@ -30,21 +28,33 @@ defmodule Start do
 end
 #IO.puts(Start.base_fuel)
 
-
-
 defmodule Fuel do
   def add_fuel(ship_mass, add_mass) when add_mass <= 0 do
     ship_mass
   end
 
   def add_fuel(ship_mass, gravity) do
-    add_mass = ship_mass * gravity * 0.042 - 33
+    add_mass = ship_mass * gravity * 0.033 - 42
     total = add_mass + ship_mass
-  #  add_fuel(ship_mass, total)
+    #add_fuel(ship_mass, total)
     IO.puts(total)
   end
 end
-IO.puts(Fuel.add_fuel(Start.ship_mass, Start.gravity))
+#IO.puts(Fuel.add_fuel(Start.land, Start.gravity))
+
+defmodule Test do
+  def fuel(ship_mass, total) when ship_mass <= 60 do
+    ship_mass + total
+  end
+  def fuel(ship_mass, total) do
+    add_mass = ship_mass * 1.62 * 0.033 - 42
+    total = total + add_mass
+    fuel(add_mass, total)
+  end
+end
+
+IO.puts(Test.fuel(Start.land, 0))
+
 
 
 
@@ -64,12 +74,3 @@ IO.puts(Fuel.add_fuel(Start.ship_mass, Start.gravity))
 #landing = ship_mass * gravity * 0.033 - 42
 
 # [{:launch, 9.807}, {:land, 1.62}, {:launch, 1.62}, {:land, 9.807}]
-
-#defmodule Varlink do
-
-#  ship_mass = 28801
-#  gravity = 9.807
-#  def printing do
-#    IO.puts(launch)
-#  end
-#end
