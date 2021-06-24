@@ -11,7 +11,6 @@ defmodule Start do
     IO.gets("Enter planet gravity: ")
        |> String.trim
        |> String.to_float
-#       |> Float.floor
   end
 # amount of fuel for landing
   def land do
@@ -25,7 +24,7 @@ defmodule Start do
               |> Kernel.trunc
   end
 end
-#IO.puts(Start.base_fuel)
+
 
 defmodule Fuel do
   def add_fuel(ship_mass, add_mass) when add_mass <= 0 do
@@ -43,19 +42,21 @@ end
 
 defmodule Test do
   def fuel(ship_mass, total) when ship_mass <= 0 do
-    ship_mass + total
+    total = total + Start.ship_mass
+    IO.puts(total)
   end
   def fuel(ship_mass, total) do
     add_mass = ship_mass * 9.807 * 0.033 - 42
-    total = total + add_mass
-    fuel(add_mass, total)
-    IO.inspect(total)
+    fuel(add_mass, total + add_mass)
+
+    IO.puts(total)
     IO.inspect(ship_mass)
-    total + ship_mass
+    #total + ship_mass
   end
 end
 
-IO.puts(Test.fuel(Start.land, 0))
+IO.puts(Test.fuel(Start.ship_mass, 0))
+
 
 
 
