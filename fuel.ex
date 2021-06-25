@@ -26,21 +26,7 @@ defmodule Start do
 end
 
 
-defmodule Fuel do
-  def add_fuel(ship_mass, add_mass) when add_mass <= 0 do
-    ship_mass
-  end
-
-  def add_fuel(ship_mass, gravity) do
-    add_mass = ship_mass * gravity * 0.033 - 42
-    total = add_mass + ship_mass
-    #add_fuel(ship_mass, total)
-    IO.puts(total)
-  end
-end
-#IO.puts(Fuel.add_fuel(Start.land, Start.gravity))
-
-defmodule Test do
+defmodule Mass do
   def fuel(ship_mass, total) when ship_mass <= 0 do
     total = total + Start.ship_mass
     IO.puts(total)
@@ -49,13 +35,12 @@ defmodule Test do
     add_mass = ship_mass * 9.807 * 0.033 - 42
     fuel(add_mass, total + add_mass)
 
-    IO.puts(total)
+#    IO.puts(total)
     IO.inspect(ship_mass)
-    #total + ship_mass
   end
 end
 
-IO.puts(Test.fuel(Start.ship_mass, 0))
+IO.puts(Mass.fuel(Start.ship_mass, 0))
 
 
 
@@ -74,12 +59,3 @@ IO.puts(Test.fuel(Start.ship_mass, 0))
 #landing = ship_mass * gravity * 0.033 - 42
 
 # [{:launch, 9.807}, {:land, 1.62}, {:launch, 1.62}, {:land, 9.807}]
-
-#defmodule Varlink do
-
-#  ship_mass = 28801
-#  gravity = 9.807
-#  def printing do
-#    IO.puts(launch)
-#  end
-#end
