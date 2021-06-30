@@ -12,45 +12,37 @@ defmodule Start do
        |> String.trim
        |> String.to_float
   end
-# amount of fuel for landing
-  def land do
-    Start.ship_mass * Start.gravity * 0.033 - 42
-              |> Kernel.trunc
-  end
-
-# amount of fuel for launch
-  def launch do
-    Start.ship_mass * Start.gravity * 0.042 - 33
-              |> Kernel.trunc
-  end
 end
 
 
 defmodule Mass do
-  def fuel(ship_mass, total) when ship_mass <= 0 do
-    total = total + Start.ship_mass
-    IO.puts(total)
+  #calculating the fuel amount for landing
+  def land(ship_mass, total) when ship_mass <= 0 do
+    total
   end
-  def fuel(ship_mass, total) do
+  def land(ship_mass, total) do
     add_mass = ship_mass * 9.807 * 0.033 - 42
-    fuel(add_mass, total + add_mass)
+           |> Float.floor
+           |> Kernel.trunc
+    land(add_mass, total + add_mass)
+  end
 
-#    IO.puts(total)
-    IO.inspect(ship_mass)
+  #calculating fuel amount for launch
+  def launch(ship_mass, total) when ship_mass <= 0 do
+    total
+  end
+  def launch(ship_mass, total) do
+    add_mass = ship_mass * 9.807 * 0.042 - 33
+           |> Float.floor
+           |> Kernel.trunc
+    launch(add_mass, total + add_mass)
   end
 end
 
-IO.puts(Mass.fuel(Start.ship_mass, 0))
+IO.puts(Mass.land(Start.ship_mass, 0))
+IO.puts(Mass.launch(Start.ship_mass, 0))
 
 
-
-
-#IO.puts("The amount of fuel for launch: " <> Float.to_string(Float.floor(launch)))
-#IO.puts("The amount of fuel for landing: " <> Float.to_string(Float.floor(landing)))
-
-#mass = IO.gets("Please provide the mass of the rocket: ")
-#gravity = IO.gets("Enter the gravity ratio for the planet of mission start ")
-# landing = IO.gets("Please provide the")
 
 #ship_mass = 28801
 #gravity = 9.807
