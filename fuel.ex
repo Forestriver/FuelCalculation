@@ -23,7 +23,7 @@ defmodule Start do
 end
 
 defmodule Mass do
-  # calculating fuel amount for launch.
+  # calculating fuel amount for launch
   # I encountered some problems with passing "gravity" function as second parameter for launch(). I got
   # here the (ArithmeticError) bad argument in arithmetic expression. I got it only with recursion.
   # This launch() func uses the hardcoded float as gravity. As result, the recursion worked well.
